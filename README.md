@@ -1,6 +1,7 @@
 # flutter_elecal
 
-A new Flutter application.
+element weight calculator
+
 
 ## Getting Started
 

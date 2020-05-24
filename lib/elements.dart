@@ -1,0 +1,97 @@
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+//原子质量库
+var eleKeyList = <String>["Ti", "Ni", "Hf", "Cr", "Cu"];
+var eleValueList = <double>[47.867, 58.6934, 178.49, 51.9961, 63.546];
+
+//历史成分库calHistoryList
+class CalHistory {
+  List<String> percentList;
+  List<String> eleKeyList;
+  List<double> eleValueList;
+  CalHistory(this.percentList,this.eleKeyList,this.eleValueList);
+}
+List<CalHistory> calHistoryList = [];
+
+
+class ElementsPage extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => ElementsPageState();
+}
+
+class ElementsPageState extends State {
+  var _textFieldController1 = new TextEditingController();
+  var _textFieldController2 = new TextEditingController();
+
+
+  /// SharedPreferences存储数据
+//  Future saveString() async {
+//    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+//    for (var i = 1; i <= eleKeyList.length; i++) {
+//      sharedPreferences.setDouble(eleKeyList[i - 1], eleValueList[i - 1]);
+//    }
+//    print(sharedPreferences.getKeys());
+//  }
+
+  /// 获取SharedPreferences中数据
+//  Future getString() async {
+//    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+//    setState(() {
+//      _storageString = sharedPreferences.get(STORAGE_KEY);
+//    });
+//  }
+
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+//        floatingActionButton: FloatingActionButton(
+//          child: Icon(Icons.add),
+//          onPressed: ,
+//        ),
+//        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+        body: Container(
+          padding: EdgeInsets.all(20.0),
+          child: ListView.builder(
+              itemCount: eleKeyList.length,
+              itemBuilder: (BuildContext context, i) {
+                return Column(
+                  children: <Widget>[
+                    ListTile(
+                      leading: Icon(
+                        Icons.hdr_strong,
+                        color: Colors.cyan,
+                      ),
+                      title: Row(children: [
+                        Expanded(
+                            flex: 1,
+                            child: Text(
+                              eleKeyList[i],
+                              style: TextStyle(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.cyan),
+                            )),
+                        Expanded(
+                            flex: 1,
+                            child: Text(
+                              eleValueList[i].toString(),
+                              style: TextStyle(
+                                  fontSize: 22,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black54),
+                            ))
+                      ]),
+                    ),
+                    Container(
+                      child: Text(
+                        "------------------------------------------------------------------------------------------",
+                        style: TextStyle(color: Colors.cyan),
+                      ),
+                    )
+                  ],
+                );
+              }),
+        ));
+  }
+}

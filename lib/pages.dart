@@ -49,30 +49,40 @@ class NewComponentPageState extends State<NewComponentPage> {
       appBar: new AppBar(
         title: new Text("New Component"),
       ),
-      body: ListView.builder(
-          itemCount: eleKeyList.length,
-          itemBuilder: (context, index) {
-            componentTextControllerList.add(
-                new TextEditingController()); //！ 事先建好controllerlist无效，需单个add
+      body: Padding(
+        padding: const EdgeInsets.all(15.0),
+        child: ListView.builder(
+            itemCount: eleKeyList.length,
+            itemBuilder: (context, index) {
+              componentTextControllerList.add(
+                  new TextEditingController()); //！ 事先建好controllerlist无效，需单个add
 //            print(componentTextControllerList.length);
-            return Row(
-              children: <Widget>[
-                Expanded(
-                    flex: 1,
-                    child: TextField(
-                      controller: componentTextControllerList[index],
-                      inputFormatters: [
-                        WhitelistingTextInputFormatter(RegExp("[0-9.]"))
-                      ], //只允许输入数字和小数点
-                    )),
-                Expanded(
-                    flex: 1,
-                    child: ListTile(
-                      title: Text(eleKeyList[index]),
-                    )),
-              ],
-            );
-          }),
+              return Card(margin: EdgeInsets.fromLTRB(15.0,00.0,15.0,0.0),elevation: 3.0,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(0.0))),
+                child: Padding(
+                  padding: const EdgeInsets.all(5.0),
+                  child: Row(
+                    children: <Widget>[
+                      Expanded(flex: 1,child: Container(child: Icon(Icons.pie_chart,color: Colors.cyan,)),),
+                      Expanded(
+                          flex: 2,
+                          child: TextField(
+                            controller: componentTextControllerList[index],
+                            inputFormatters: [
+                              WhitelistingTextInputFormatter(RegExp("[0-9.]"))
+                            ], //只允许输入数字和小数点
+                          )),
+                      Expanded(
+                          flex: 1,
+                          child: ListTile(
+                            title: Text(eleKeyList[index],style: TextStyle(color: Colors.cyan,fontWeight: FontWeight.bold,),),
+                          )),
+                    ],
+                  ),
+                ),
+              );
+            }),
+      ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.assignment_turned_in),
         onPressed: () {

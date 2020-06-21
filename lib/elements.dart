@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 //原子质量库
-var eleKeyList = <String>["Ti", "Ni", "Hf", "Cr", "Cu"];
-var eleValueList = <double>[47.867, 58.6934, 178.49, 51.9961, 63.546];
+var eleKeyList = <String>["Ti", "Ni", "Hf", "Cr", "Cu", "Zr"];
+var eleValueList = <double>[47.867, 58.6934, 178.49, 51.9961, 63.546, 91.2242];
 
 //历史成分库calHistoryList
 class CalHistory {
   List<String> percentList;
   List<String> eleKeyList;
   List<double> eleValueList;
-  CalHistory(this.percentList,this.eleKeyList,this.eleValueList);
+  CalHistory(this.percentList, this.eleKeyList, this.eleValueList);
 }
-List<CalHistory> calHistoryList = [];
 
+List<CalHistory> calHistoryList = [];
 
 class ElementsPage extends StatefulWidget {
   @override
@@ -23,7 +23,6 @@ class ElementsPage extends StatefulWidget {
 class ElementsPageState extends State {
   var _textFieldController1 = new TextEditingController();
   var _textFieldController2 = new TextEditingController();
-
 
   /// SharedPreferences存储数据
 //  Future saveString() async {
@@ -51,47 +50,66 @@ class ElementsPageState extends State {
 //        ),
 //        floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
         body: Container(
-          padding: EdgeInsets.all(20.0),
-          child: ListView.builder(
-              itemCount: eleKeyList.length,
-              itemBuilder: (BuildContext context, i) {
-                return Column(
-                  children: <Widget>[
-                    ListTile(
-                      leading: Icon(
-                        Icons.hdr_strong,
-                        color: Colors.cyan,
-                      ),
-                      title: Row(children: [
-                        Expanded(
-                            flex: 1,
-                            child: Text(
-                              eleKeyList[i],
-                              style: TextStyle(
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.cyan),
-                            )),
-                        Expanded(
-                            flex: 1,
-                            child: Text(
-                              eleValueList[i].toString(),
-                              style: TextStyle(
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black54),
-                            ))
-                      ]),
-                    ),
-                    Container(
-                      child: Text(
-                        "------------------------------------------------------------------------------------------",
-                        style: TextStyle(color: Colors.cyan),
-                      ),
-                    )
-                  ],
-                );
-              }),
-        ));
+      padding: EdgeInsets.fromLTRB(
+        5.0,
+        15.0,
+        5.0,
+        15.0,
+      ),
+      child: ListView.builder(
+          itemCount: eleKeyList.length,
+          itemBuilder: (BuildContext context, i) {
+            return Card(
+              child: ListTile(
+
+                title: Row(children: [
+                  Expanded(flex: 1, child: Center(child: Icon(
+                    Icons.hdr_strong,
+                    color: Colors.cyan,
+                  ),)),
+                  Expanded(
+                      flex: 1,
+
+                        child: Text(
+                          eleKeyList[i],
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.cyan),
+
+                      )),
+                  Expanded(
+                      flex: 1,
+                      child: Center(
+                        child: Text(
+                          eleValueList[i].toString(),
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black54),
+                        ),
+                      )),
+                  Expanded(
+                      flex: 1,
+
+                        child: Center(
+                          child: Text(
+                            "g/mol",
+                            style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.cyan),
+                          ),
+                        ),
+                      )
+                ]),
+              ),
+              margin: EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(0.0))),
+              elevation: 2.0,
+            );
+          }),
+    ));
   }
 }

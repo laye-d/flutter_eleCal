@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 //原子质量库
-var eleKeyList = <String>["Ti", "Ni", "Hf", "Cr", "Cu", "Zr"];
-var eleValueList = <double>[47.867, 58.6934, 178.49, 51.9961, 63.546, 91.2242];
+var eleKeyList = <String>["Ti", "Ni", "Hf", "Cr", "Cu", "Zr", "Al", "V", "Fe", "Co", "Nb", "Mo"];
+var eleValueList = <double>[47.867, 58.6934, 178.49, 51.9961, 63.546, 91.2242, 26.98154, 50.9415, 55.8452, 58.9332, 92.9064, 95.962];
 
 //历史成分库calHistoryList
 class CalHistory {
